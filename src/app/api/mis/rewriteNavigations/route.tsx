@@ -5,8 +5,10 @@ type NavItem = {
     text: string;
     clickToPath?: string | undefined;
     clickable?: boolean | undefined;
-    iconSrc?: string | undefined;
-    iconAlt?: string;
+    icon?: {
+      src: string;
+      alt?: string
+    },
     openInNewPage?: boolean | undefined;
     children?: NavItem[] | undefined;
 }
@@ -28,7 +30,7 @@ export async function POST(request: NextRequest) {
     clickToPath: "/extensions/myExtensionPage/page1",
     text: isChinese ? "扩展组" : "Ext Group",
     children: [
-      { path: "/extensions/myExtensionPage/page1", text: isChinese ? "扩展页面" : "Ext Page", iconSrc: "http://localhost:16566/vercel.svg" },
+      { path: "/extensions/myExtensionPage/page1", text: isChinese ? "扩展页面" : "Ext Page", icon: { src: "http://localhost:16566/vercel.svg" }},
       { path: "https://github.com", text: isChinese ? "外部链接 (Github)" : "Ext Link (GitHub)" },
     ]
   });
