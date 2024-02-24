@@ -3,10 +3,9 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { App, ConfigProvider, Layout, theme } from "antd"
-import { ThemeStore } from "@/app/theme";
-import { StoreProvider, createStore, useStore } from "simstate";
-import React, { useState } from "react";
+import React, { PropsWithChildren, useState } from "react";
 import StyledComponentsRegistry from "@/lib/AntdRegistry";
+import { useSearchParams } from "next/navigation";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,36 +14,45 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const [themeStore] = useState(() => createStore(ThemeStore));
 
   return (
     <html lang="en">
       <body>
         <StyledComponentsRegistry>
-          <StoreProvider stores={[themeStore]}>
-            <Page>
-              {children}
-            </Page>
-          </StoreProvider>
+          <Page>
+            {children}
+          </Page>
         </StyledComponentsRegistry>
       </body>
     </html>
   )
 }
 
-const Page: React.FC<React.PropsWithChildren> = ({ children }) => {
+const DarkModeProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
 
-  const themeStore = useStore(ThemeStore);
+  const search = useSearchParams();
+
+  const dark = search.get("scowDark") === "true";
+
+  return (
+    <ConfigProvider theme={{
+      algorithm: dark ? theme.darkAlgorithm : undefined,
+    }}>
+      {children}
+    </ConfigProvider>
+  )
+
+}
+
+const Page: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   return (
     <App>
-      <ConfigProvider theme={{
-        algorithm: themeStore.dark ? theme.darkAlgorithm : undefined,
-      }}>
+      <DarkModeProvider>
         <Layout>
           {children}
         </Layout>
-      </ConfigProvider>
+      </DarkModeProvider>
     </App>
   );
 }

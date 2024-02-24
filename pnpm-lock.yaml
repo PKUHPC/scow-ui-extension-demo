@@ -20,9 +20,6 @@ dependencies:
   react-dom:
     specifier: ^18
     version: 18.2.0(react@18.2.0)
-  simstate:
-    specifier: 3.0.1
-    version: 3.0.1(react@18.2.0)
 
 devDependencies:
   '@types/node':
@@ -2761,15 +2758,6 @@ packages:
       object-inspect: 1.13.1
     dev: true
 
-  /simstate@3.0.1(react@18.2.0):
-    resolution: {integrity: sha512-H2vufxjgfQ7Hxf7KGN0p2GNznjd8i+E6o8fegZFLjY+aVPUY8o+paYrVlNKa7GWSuW0WtchO8/ENTMiUdkMMsA==}
-    peerDependencies:
-      react: '>=16.8.0'
-    dependencies:
-      react: 18.2.0
-      tslib: 1.10.0
-    dev: false
-
   /slash@3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
@@ -2920,10 +2908,6 @@ packages:
       minimist: 1.2.8
       strip-bom: 3.0.0
     dev: true
-
-  /tslib@1.10.0:
-    resolution: {integrity: sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==}
-    dev: false
 
   /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}

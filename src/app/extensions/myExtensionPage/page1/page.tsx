@@ -1,17 +1,15 @@
 "use client";
 
-import { ThemeStore } from "@/app/theme";
 import { Button, Checkbox, Form, Input } from "antd";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { NextRequest } from "next/server";
 import { useEffect } from "react";
-import { useStore } from "simstate";
 
 type FieldType = {
-    username?: string;
-    password?: string;
-    remember?: string;
-  };
+  username?: string;
+  password?: string;
+  remember?: string;
+};
 
 const languages = {
   zh_cn: {
@@ -36,20 +34,12 @@ export default function Page() {
 
   const token = search.get("scowUserToken");
 
-  const dark = search.get("scowDark") === "true";
-
   const languageId = search.get("scowLangId");
 
   const language = ((languageId && languageId in languages) 
     ? languages[languageId as keyof typeof languages] 
     : undefined
   ) ?? languages.zh_cn;
-
-  const store = useStore(ThemeStore);
-
-  useEffect(() => {
-    store.setDark(dark);
-  }, [store, dark]);
 
   return (
     <Form
