@@ -30,8 +30,8 @@ export async function POST(request: NextRequest) {
     clickToPath: "myExtensionPage/page1",
     text: isChinese ? "扩展组" : "Ext Group",
     children: [
-      { path: "myExtensionPage/page1", text: isChinese ? "扩展页面" : "Ext Page", icon: { src: "http://localhost:16566/vercel.svg" }},
-      { path: "https://github.com", text: isChinese ? "外部链接 (Github)" : "Ext Link (GitHub)" },
+      { path: "myExtensionPage/page1", text: isChinese ? "扩展页面" : "Ext Page", icon: { src: "http://localhost:16566/ok.svg" }},
+      { path: "https://www.pkuscow.com", text: isChinese ? "外部链接" : "Ext Link" },
     ]
   });
 
