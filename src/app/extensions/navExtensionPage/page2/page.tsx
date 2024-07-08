@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Checkbox, Descriptions, DescriptionsProps, Form, Input } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import '../../../globals.css';
 
 type FieldType = {
@@ -24,36 +24,6 @@ export default function Page() {
   };
 
   
-  useEffect(()=>{
-    // postIframeMessage();
-    const sendMessage = (height: number) => {
-      window.parent.postMessage({
-        type: "resizeExtensionIframe",  // 发送信息的类型，不允许更改
-        payload: {
-          height: height
-        }
-      }, '*')
-    }
-
-    const observer = new ResizeObserver((entries) => {
-
-      const e = entries[0];
-      sendMessage(e.contentRect.height);
-    });
-
-
-    const htmlElement = document.querySelector("html")!;
-
-    sendMessage(htmlElement.getBoundingClientRect().height);
-
-    observer.observe(htmlElement);
-
-    return () => {
-      observer.disconnect();
-    }
-
-  }, []);
-
   return (
     <div>
       {Array.from({length: count}).map((_, index) => (
