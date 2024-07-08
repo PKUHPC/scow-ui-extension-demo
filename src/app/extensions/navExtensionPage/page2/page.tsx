@@ -12,72 +12,60 @@ type FieldType = {
 
 export default function Page() {
 
-  const items: DescriptionsProps['items'] = [
-    {
-      key: '1',
-      label: 'UserName',
-      children: <p>Zhou Maomao</p>,
-      span: 3,
-    },
-    {
-      key: '2',
-      label: 'Telephone',
-      children: <p>1810000000</p>,
-      span: 3,
-    },
-    {
-      key: '3',
-      label: 'Live',
-      children: <p>Hangzhou, Zhejiang</p>,
-      span: 3,
-    },
-    {
-      key: '4',
-      label: 'Remark',
-      children: <p>empty</p>,
-      span: 3,
-    },
-    {
-      key: '5',
-      label: 'Address',
-      children: <p>No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China</p>,
-      span: 3,
-    },
-  ];
   
-  const [descriptionsList, setDescriptionsList] = useState<Array<JSX.Element>>(() => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <Descriptions key={i} title="User Info" items={items} />
-    ));
-  });
+  const [count, setCount] = useState(5);
 
-  const addDescription = () => {
-    setDescriptionsList((prevList) => [
-      ...prevList,
-      <Descriptions key={prevList.length} title="User Info" items={items} />
-    ]);
+  const addItem = () => {
+    setCount((c) => c+1);
   };
-  
-  // 发送 postMessage 信息时，请严格按照以下模式发送：
-  const postIframeMessage = () =>{
-    let elRect = document.querySelector("html")!.getBoundingClientRect();
-    window.parent.postMessage({
-      type: 'resizeExtensionIframe',  // 发送信息的类型，不允许更改
-      payload: {
-        height: elRect.height         // 设置iframe的高
-      }
-    }, '*')
-  }
 
-  // 页面首次生成及页面高度变化以后，调用一次postMessage通知iframe的parent重新设置iframe的高度。
+  const removeItem = () => {
+    setCount((c) => c-1);
+  };
+
+  
   useEffect(()=>{
-    postIframeMessage();
-  },[descriptionsList]);
+    // postIframeMessage();
+    const sendMessage = (height: number) => {
+      window.parent.postMessage({
+        type: "resizeExtensionIframe",  // 发送信息的类型，不允许更改
+        payload: {
+          height: height
+        }
+      }, '*')
+    }
+
+    const observer = new ResizeObserver((entries) => {
+
+      const e = entries[0];
+      sendMessage(e.contentRect.height);
+    });
+
+
+    const htmlElement = document.querySelector("html")!;
+
+    sendMessage(htmlElement.getBoundingClientRect().height);
+
+    observer.observe(htmlElement);
+
+    return () => {
+      observer.disconnect();
+    }
+
+  }, []);
 
   return (
     <div>
-      {descriptionsList}
-      <Button onClick={addDescription}>页面加高</Button>
+      {Array.from({length: count}).map((_, index) => (
+        <div key={index} style={{padding: 10, border: '1px solid #ccc', marginBottom: 10}}>
+          <Descriptions title={`Item ${index+1}`} layout="vertical">
+            <Descriptions.Item label="Name">Zhang San</Descriptions.Item>
+            <Descriptions.Item label="Age">18</Descriptions.Item>
+          </Descriptions>        
+        </div>
+      ))}
+      <Button onClick={addItem}>Add 1 item</Button>
+      <Button onClick={removeItem}>Remove 1 item</Button>
     </div>
   )
 }
