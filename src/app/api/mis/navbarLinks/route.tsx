@@ -23,8 +23,13 @@ export async function POST(request: NextRequest) {
       {
         href: "https://www.pkuscow.com",
         text: isChinese ? "通知系统" : "Notification",
-        icon: { src: "http://localhost:16566/vercel.svg" },
-      },      
+        icon: { src: "http://localhost:16566/chat.svg" },
+      },   
+      {
+        href: "extensions/navExtensionPage/page2",
+        text: isChinese ? "长页面" : "Notification",
+        icon: { src: "http://localhost:16566/chat.svg" },
+      },     
     ] as NavbarLink[]
   });
 }

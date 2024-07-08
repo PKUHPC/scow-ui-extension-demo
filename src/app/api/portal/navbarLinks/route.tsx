@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
         icon: { src: "http://localhost:16566/bell.svg" },
       },      
       {
-        href: "https://www.pkuscow.com",
+        href: "extensions/navExtensionPage/page2",
         text: isChinese ? "聊天" : "Chat",
         icon: { src: "http://localhost:16566/chat.svg" },
         priority: 100,

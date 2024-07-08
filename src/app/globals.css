@@ -100,6 +100,12 @@ a {
   text-decoration: none;
 }
 
+/* 考虑到是在iframe中展示页面，所以隐藏滚动条，提高用户体验 */
+body::-webkit-scrollbar {
+  width: 0px; 
+  height: 0px; 
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
