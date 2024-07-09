@@ -5,6 +5,7 @@ import { App, ConfigProvider, Layout, theme } from "antd"
 import React, { PropsWithChildren, useEffect, useState } from "react";
 import StyledComponentsRegistry from "@/lib/AntdRegistry";
 import { useSearchParams } from "next/navigation";
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -65,7 +66,7 @@ const useReportHeightToScow = () => {
 
     const htmlElement = document.querySelector("html")!;
 
-    sendMessage(htmlElement.getBoundingClientRect().height);
+    sendMessage(htmlElement.getBoundingClientRect().height + 20);
 
     observer.observe(htmlElement);
 

@@ -2,7 +2,6 @@
 
 import { Button, Checkbox, Descriptions, DescriptionsProps, Form, Input } from "antd";
 import { useState } from "react";
-import '../../../globals.css';
 
 type FieldType = {
   username?: string;
