@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 type NavbarLink = {
-    href: string;
+    path: string;
     text: string;
     icon?: {
       src: string;
@@ -22,12 +22,12 @@ export async function POST(request: NextRequest) {
   return NextResponse.json({
     navbarLinks: [
       {
-        href: "https://www.pkuscow.com",
+        path: "https://www.pkuscow.com",
         text: isChinese ? "通知" : "Notification",
         icon: { src: "http://localhost:16566/bell.svg" },
       },      
       {
-        href: "/extensions/navExtensionPage/page2",
+        path: "navExtensionPage/page2",
         text: isChinese ? "聊天" : "Chat",
         icon: { src: "http://localhost:16566/chat.svg" },
         priority: 100,
