@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
         icon: { src: "http://localhost:16566/chat.svg" },
       },   
       {
-        href: "/extensions/navExtensionPage/page2",
+        href: "navExtensionPage/page2",
         text: isChinese ? "长页面" : "Notification",
         icon: { src: "http://localhost:16566/chat.svg" },
       },     
