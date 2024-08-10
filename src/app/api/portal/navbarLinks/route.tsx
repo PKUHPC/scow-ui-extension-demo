@@ -29,9 +29,9 @@ export async function POST(request: NextRequest) {
       {
         path: "navExtensionPage/page2",
         text: isChinese ? "聊天" : "Chat",
-        icon: { src: "http://localhost:16566/chat.svg" },
+        icon: { src: `http://localhost:16566/${Math.random() > 0.5 ? "chat-unread.svg" : "chat.svg"}` },
         priority: 100,
-      },      
+      },
     ] satisfies NavbarLink[]
   });
 }
