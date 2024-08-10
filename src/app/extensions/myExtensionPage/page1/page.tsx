@@ -18,6 +18,7 @@ const languages = {
     password: "密码",
     remember: "记住登录",
     submit: "提交",
+    title: "页面1标题",
   },
   en: {
     username: "Username",
@@ -25,6 +26,7 @@ const languages = {
     password: "Password",
     remember: "Remember Login",
     submit: "Submit",
+    title: "Page 1 Title",
   }
 };
 
@@ -40,6 +42,15 @@ export default function Page() {
     ? languages[languageId as keyof typeof languages] 
     : undefined
   ) ?? languages.zh_cn;
+
+  useEffect(() => {
+    window.parent?.postMessage({
+      type: "scow.extensionPageTitleChanged", 
+      payload: {
+        title: language.title,
+      }
+    }, '*')
+  }, [language]);
 
   return (
     <Form
